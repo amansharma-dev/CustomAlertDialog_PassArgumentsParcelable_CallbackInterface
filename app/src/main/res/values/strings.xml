@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">CustomAlertDialog_PassArgumentsParcelable_CallbackInterface</string>
+
+    <string name="text_customDialog">Custom Alert Dialog.</string>
+    <string name="button_textCancel">Cancel</string>
+    <string name="button_textSend">Send</string>
+
+</resources>
