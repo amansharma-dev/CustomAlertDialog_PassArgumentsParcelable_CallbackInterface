@@ -8,10 +8,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.example.customalertdialog_passargumentsparcelable_callbackinterface.model.UserDetails;
 
 public class CustomDialogFragment extends DialogFragment {
 
     private Button cancelBtn,sendBtn;
+    private EditText et_firstName,et_lastName,et_age;
+    public static final String USER_DETAILS = "user_details";
+
+    public static CustomDialogFragment newInstance(UserDetails userDetails) {
+
+        Bundle args = new Bundle();
+        args.putParcelable(USER_DETAILS,userDetails);
+        CustomDialogFragment fragment = new CustomDialogFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
     @Nullable
     @Override
@@ -20,6 +35,15 @@ public class CustomDialogFragment extends DialogFragment {
 
         cancelBtn = view.findViewById(R.id.cancel_button);
         sendBtn = view.findViewById(R.id.send_button);
+
+        et_firstName = view.findViewById(R.id.firstName);
+        et_lastName = view.findViewById(R.id.lastName);
+        et_age = view.findViewById(R.id.age);
+
+        UserDetails userDetails = getArguments().getParcelable(USER_DETAILS);
+        et_firstName.setText(userDetails.getfName());
+        et_lastName.setText(userDetails.getlName());
+        et_age.setText(String.valueOf(userDetails.getAge()));
 
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
