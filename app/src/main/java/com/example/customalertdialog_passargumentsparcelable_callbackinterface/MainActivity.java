@@ -5,10 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.customalertdialog_passargumentsparcelable_callbackinterface.model.UserDetails;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CustomDialogFragment.FragmentListener{
 
     private FloatingActionButton floatingActionButton;
 
@@ -34,5 +35,10 @@ public class MainActivity extends AppCompatActivity {
         CustomDialogFragment customDialogFragment = CustomDialogFragment.newInstance(userDetails);
         customDialogFragment.setCancelable(false);
         customDialogFragment.show(getSupportFragmentManager(),"CUSTOM_ALERT_DIALOG");
+    }
+
+    @Override
+    public void UserDetailsFragmentListener(UserDetails userDetails) {
+        Toast.makeText(getApplicationContext(), ""+userDetails.getfName()+","+userDetails.getlName()+","+userDetails.getAge(),Toast.LENGTH_SHORT).show();
     }
 }

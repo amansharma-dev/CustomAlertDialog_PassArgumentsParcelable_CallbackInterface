@@ -1,5 +1,6 @@
 package com.example.customalertdialog_passargumentsparcelable_callbackinterface;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,17 @@ public class CustomDialogFragment extends DialogFragment {
     private Button cancelBtn,sendBtn;
     private EditText et_firstName,et_lastName,et_age;
     public static final String USER_DETAILS = "user_details";
+    private FragmentListener fragmentListener;
+
+    interface FragmentListener{
+        void UserDetailsFragmentListener(UserDetails userDetails);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        fragmentListener = (FragmentListener) context;
+    }
 
     public static CustomDialogFragment newInstance(UserDetails userDetails) {
 
@@ -55,9 +67,20 @@ public class CustomDialogFragment extends DialogFragment {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendData();
                 dismiss();
             }
         });
         return view;
+    }
+
+
+    public void sendData(){
+        UserDetails userDetails = new UserDetails();
+        userDetails.setfName(et_firstName.getText().toString());
+        userDetails.setlName(et_lastName.getText().toString());
+        userDetails.setAge(Integer.valueOf(et_age.getText().toString()));
+
+        fragmentListener.UserDetailsFragmentListener(userDetails);
     }
 }

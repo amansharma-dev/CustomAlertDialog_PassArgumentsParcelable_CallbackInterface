@@ -8,6 +8,9 @@ public class UserDetails implements Parcelable {
     private String fName,lName;
     private int age;
 
+    public UserDetails() {
+    }
+
     public UserDetails(String fName, String lName, int age) {
         this.fName = fName;
         this.lName = lName;
